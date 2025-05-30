@@ -1,4 +1,6 @@
+# postgresql
 
+<pre>
 C:\Users\Minfy>psql -U postgres
 Password for user postgres:
 psql (17.5)
@@ -1492,4 +1494,4 @@ university_db=> SELECT * FROM enrollments WHERE student_id = 1;
 (0 rows)
 
 
-university_db=>
+</pre>
