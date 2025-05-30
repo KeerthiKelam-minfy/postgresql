@@ -1,147 +1,971 @@
-![image](https://github.com/user-attachments/assets/1558f3eb-312b-4929-9b22-66512a046b53)# postgresql
 
+C:\Users\Minfy>psql -U postgres
+Password for user postgres:
+psql (17.5)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# DROP OWNED BY university_admin;
+DROP OWNED
+postgres=# CREATE USER keerthikelam WITH PASSWORD '*************';
+ERROR:  role "keerthikelam" already exists
+postgres=# CREATE DATABASE university_db OWNER university_admin;
+CREATE DATABASE
+postgres=# CREATE DATABASE minfy_db OWNER keerthikelam;
+CREATE DATABASE
+postgres=# GRANT ALL PRIVILEGES ON DATABASE minfy_db TO keerthikelam;
+GRANT
+postgres=# psql -U keerthikelam -d minfy_db
+postgres-# CREATE DATABASE university_db OWNER keerthikelam;
+ERROR:  syntax error at or near "psql"
+LINE 1: psql -U keerthikelam -d minfy_db
+        ^
+postgres=# psql -U keerthikelam -d university_db
+postgres-# CREATE DATABASE university_db OWNER keerthikelam;
+ERROR:  syntax error at or near "psql"
+LINE 1: psql -U keerthikelam -d university_db
+        ^
+postgres=# \u
+invalid command \u
+Try \? for help.
+postgres=# \U
+invalid command \U
+Try \? for help.
+postgres=# \\q
+invalid command \
+Try \? for help.
+postgres=# \q
+
+C:\Users\Minfy>psql -U postgres
+Password for user postgres:
+psql (17.5)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# CREATE DATABASE university_db OWNER keerthikelam;
+CREATE DATABASE
+postgres=# psql -U keerthikelam -d university_db
+postgres-# \q
+
+C:\Users\Minfy>\l
+'\l' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\Minfy>psql -U postgres
+Password for user postgres:
+psql (17.5)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# \l
+                                                                    List of databases
+     Name      |    Owner     | Encoding | Locale Provider |      Collate       |       Ctype        | Locale | ICU Rules |       Access privileges
+---------------+--------------+----------+-----------------+--------------------+--------------------+--------+-----------+-------------------------------
+ minfy_db      | keerthikelam | UTF8     | libc            | English_India.1252 | English_India.1252 |        |           | =Tc/keerthikelam             +
+               |              |          |                 |                    |                    |        |           | keerthikelam=CTc/keerthikelam
+ postgres      | postgres     | UTF8     | libc            | English_India.1252 | English_India.1252 |        |           |
+ template0     | postgres     | UTF8     | libc            | English_India.1252 | English_India.1252 |        |           | =c/postgres                  +
+               |              |          |                 |                    |                    |        |           | postgres=CTc/postgres
+ template1     | postgres     | UTF8     | libc            | English_India.1252 | English_India.1252 |        |           | =c/postgres                  +
+               |              |          |                 |                    |                    |        |           | postgres=CTc/postgres
+ university_db | keerthikelam | UTF8     | libc            | English_India.1252 | English_India.1252 |        |           |
+(5 rows)
+
+
+postgres=# \c university_db
+You are now connected to database "university_db" as user "postgres".
+university_db=# \conninfo
+You are connected to database "university_db" as user "postgres" on host "localhost" (address "::1") at port "5432".
+university_db=# \c university_db
+You are now connected to database "university_db" as user "postgres".
+university_db=# CREATE TABLE students (
+university_db(#     student_id INTEGER,
+university_db(#     first_name VARCHAR(50),
+university_db(#     last_name VARCHAR(50),
+university_db(#     email VARCHAR(100),
+university_db(#     date_of_birth DATE
+university_db(# );
+CREATE TABLE
+university_db=# \d
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | students | table | postgres
+(1 row)
+
 
-![image](https://github.com/user-attachments/assets/85691498-a855-4a33-8480-0ac1831afb21)
+university_db=# psql -U keerthikelam -d university_db
+university_db-# \c university_db
+You are now connected to database "university_db" as user "postgres".
+university_db-# CREATE TABLE students (
+university_db(#     student_id INTEGER,
+university_db(#     first_name VARCHAR(50),
+university_db(#     last_name VARCHAR(50),
+university_db(#     email VARCHAR(100),
+university_db(#     date_of_birth DATE
+university_db(# );
+ERROR:  syntax error at or near "psql"
+LINE 1: psql -U keerthikelam -d university_db
+        ^
+university_db=# CREATE TABLE students (
+university_db(#     student_id INTEGER,
+university_db(#     first_name VARCHAR(50),
+university_db(#     last_name VARCHAR(50),
+university_db(#     email VARCHAR(100),
+university_db(#     date_of_birth DATE
+university_db(# );
+ERROR:  relation "students" already exists
+university_db=#
+university_db=# \d
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | students | table | postgres
+(1 row)
+
+
+university_db=#
+university_db=# cd ..
+university_db-# CREATE DATABASE university_db OWNER keerthikelam;
+ERROR:  syntax error at or near "cd"
+LINE 1: cd ..
+        ^
+university_db=#
+university_db=# CREATE DATABASE university_db OWNER keerthikelam;
+ERROR:  database "university_db" already exists
+university_db=# \d
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | students | table | postgres
+(1 row)
+
+
+university_db=# \D
+invalid command \D
+Try \? for help.
+university_db=# \d
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | students | table | postgres
+(1 row)
+
+
+university_db=# \q
+
+C:\Users\Minfy>psql -U keerthikelam -d university_db
+Password for user keerthikelam:
+psql (17.5)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+university_db=> \d
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | students | table | postgres
+(1 row)
+
+
+university_db=> CREATE TABLE students (
+university_db(>     student_id INTEGER,
+university_db(>     first_name VARCHAR(50),
+university_db(>     last_name VARCHAR(50),
+university_db(>     email VARCHAR(100),
+university_db(>     date_of_birth DATE
+university_db(> );
+ERROR:  relation "students" already exists
+university_db=> CREATE TABLE student (
+university_db(>     first_name VARCHAR(50),
+university_db(>     last_name VARCHAR(50),
+university_db(>     email VARCHAR(100),
+university_db(>     date_of_birth DATE
+university_db(> );
+CREATE TABLE
+university_db=> \d
+            List of relations
+ Schema |   Name   | Type  |    Owner
+--------+----------+-------+--------------
+ public | student  | table | keerthikelam
+ public | students | table | postgres
+(2 rows)
+
+
+university_db=> DROP TABLE students
+university_db-> \d
+            List of relations
+ Schema |   Name   | Type  |    Owner
+--------+----------+-------+--------------
+ public | student  | table | keerthikelam
+ public | students | table | postgres
+(2 rows)
+
+
+university_db-> \d
+            List of relations
+ Schema |   Name   | Type  |    Owner
+--------+----------+-------+--------------
+ public | student  | table | keerthikelam
+ public | students | table | postgres
+(2 rows)
+
+
+university_db-> cls
+university_db->
+university_db->
+university_db->
+university_db->
+university_db->
+university_db-> \q
+
+C:\Users\Minfy>psql -U postgres
+Password for user postgres:
+psql (17.5)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# DROP TABLE students;
+ERROR:  table "students" does not exist
+postgres=# \d
+Did not find any relations.
+postgres=# \q
+
+C:\Users\Minfy>psql -U keerthikelam -d university_admin
+Password for user keerthikelam:
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "university_admin" does not exist
+
+C:\Users\Minfy>psql -U keerthikelam -d university_admin
+Password for user keerthikelam:
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "university_admin" does not exist
+
+C:\Users\Minfy>psql -U keerthikelam -d university_admin
+Password for user keerthikelam:
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "university_admin" does not exist
+
+C:\Users\Minfy>psql -U keerthikelam -d university_db
+Password for user keerthikelam:
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "keerthikelam"
+
+C:\Users\Minfy>psql -U keerthikelam -d university_db
+Password for user keerthikelam:
+psql (17.5)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+university_db=> DROP TABLE students;
+DROP TABLE
+university_db=> \d
+            List of relations
+ Schema |  Name   | Type  |    Owner
+--------+---------+-------+--------------
+ public | student | table | keerthikelam
+(1 row)
+
+
+university_db=> cls
+university_db-> clear
+university_db-> DROP TABLE student
+university_db-> DROP TABLE student
+university_db->
+university_db->
+university_db->
+university_db->
+university_db->
+university_db-> DROP TABLE student;
+ERROR:  syntax error at or near "cls"
+LINE 1: cls
+        ^
+university_db=> DROP TABLE student;;
+DROP TABLE
+university_db=> \d
+Did not find any relations.
+university_db=> CREATE TABLE students (
+university_db(>     student_id INTEGER,
+university_db(>     first_name VARCHAR(50),
+university_db(>     last_name VARCHAR(50),
+university_db(>     email VARCHAR(100),
+university_db(>     date_of_birth DATE
+university_db(> );
+CREATE TABLE
+university_db=> \d
+            List of relations
+ Schema |   Name   | Type  |    Owner
+--------+----------+-------+--------------
+ public | students | table | keerthikelam
+(1 row)
+
+
+university_db=> ALTER TABLE students ADD COLUMN enrollment_date DATE;
+ALTER TABLE
+university_db=> ALTER TABLE students ADD COLUMN enrollment_date DATE;
+ERROR:  column "enrollment_date" of relation "students" already exists
+university_db=> ALTER TABLE students DROP COLUMN enrollment_date;
+ALTER TABLE
+university_db=> ALTER TABLE students ALTER COLUMN email TYPE VARCHAR(150);
+ALTER TABLE
+university_db=> ALTER TABLE students RENAME COLUMN date_of_birth TO dob;
+ALTER TABLE
+university_db=> ALTER TABLE students ADD CONSTRAINT unique_email UNIQUE (email);
+ALTER TABLE
+university_db=> ALTER TABLE students RENAME TO learners;
+ALTER TABLE
+university_db=> ALTER TABLE learners RENAME TO students; -- Change it back
+ALTER TABLE
+university_db=> \d
+            List of relations
+ Schema |   Name   | Type  |    Owner
+--------+----------+-------+--------------
+ public | students | table | keerthikelam
+(1 row)
+
+
+university_db=> ALTER TABLE students ADD COLUMN phone_number VARCHAR(20);
+ALTER TABLE
+university_db=> ALTER TABLE students DROP COLUMN phone_number;
+ALTER TABLE
+university_db=> \d
+            List of relations
+ Schema |   Name   | Type  |    Owner
+--------+----------+-------+--------------
+ public | students | table | keerthikelam
+(1 row)
+
+
+university_db=> DROP TABLE IF EXISTS students
+university_db-> ;
+DROP TABLE
+university_db=> \d
+Did not find any relations.
+university_db=> CREATE TABLE students (
+university_db(>     student_id INTEGER,
+university_db(>     first_name VARCHAR(50),
+university_db(>     last_name VARCHAR(50),
+university_db(>     email VARCHAR(100),
+university_db(>     date_of_birth DATE
+university_db(> );
+CREATE TABLE
+university_db=> ALTER TABLE students ADD COLUMN enrollment_date DATE;
+ALTER TABLE
+university_db=> ALTER TABLE students DROP COLUMN enrollment_date;
+ALTER TABLE
+university_db=> ALTER TABLE students ALTER COLUMN email TYPE VARCHAR(150);
+ALTER TABLE
+university_db=> ALTER TABLE students RENAME COLUMN date_of_birth TO dob;
+ALTER TABLE
+university_db=> ALTER TABLE students ADD CONSTRAINT unique_email UNIQUE (email);
+ALTER TABLE
+university_db=> ALTER TABLE students RENAME TO learners;
+ALTER TABLE
+university_db=> ALTER TABLE learners RENAME TO students; -- Change it back
+ALTER TABLE
+university_db=> \d
+            List of relations
+ Schema |   Name   | Type  |    Owner
+--------+----------+-------+--------------
+ public | students | table | keerthikelam
+(1 row)
+
+
+university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob)
+university_db-> VALUES (1, 'Alice', 'Smith', 'alice.smith@example.com', '2003-05-15');
+INSERT 0 1
+university_db=> \d students
+                       Table "public.students"
+   Column   |          Type          | Collation | Nullable | Default
+------------+------------------------+-----------+----------+---------
+ student_id | integer                |           |          |
+ first_name | character varying(50)  |           |          |
+ last_name  | character varying(50)  |           |          |
+ email      | character varying(150) |           |          |
+ dob        | date                   |           |          |
+Indexes:
+    "unique_email" UNIQUE CONSTRAINT, btree (email)
+
+
+university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob)
+university_db-> VALUES (2, 'Bob', 'Johnson', 'bob.johnson@example.com', '2002-08-22'),
+university_db->        (3, 'Charlie', 'Brown', 'charlie.brown@example.com', '2003-01-10');
+INSERT 0 2
+university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob)
+university_db-> VALUES (4, 'Keerthi', 'Kelam', 'keerhti.kelam@example.com', '2004-06-28'),
+university_db-> VALUES (5, 'Meghana sai', 'Bhima', 'meghanasai@example.com', '2003-12-22');
+ERROR:  syntax error at or near "VALUES"
+LINE 3: VALUES (5, 'Meghana sai', 'Bhima', 'meghanasai@example.com',...
+        ^
+university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob)
+university_db-> VALUES (4, 'Keerthi', 'Kelam', 'keerhti.kelam@example.com', '2004-06-28'),
+university_db->        (5, 'Meghana sai', 'Bhima', 'meghanasai@example.com', '2003-12-22');
+INSERT 0 2
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(5 rows)
+
+
+university_db=> SELECT first_name, last_name, email FROM students;
+ first_name  | last_name |           email
+-------------+-----------+---------------------------
+ Alice       | Smith     | alice.smith@example.com
+ Bob         | Johnson   | bob.johnson@example.com
+ Charlie     | Brown     | charlie.brown@example.com
+ Keerthi     | Kelam     | keerhti.kelam@example.com
+ Meghana sai | Bhima     | meghanasai@example.com
+(5 rows)
+
+
+university_db=> SELECT * FROM students WHERE first_name = "Alice";
+ERROR:  column "Alice" does not exist
+LINE 1: SELECT * FROM students WHERE first_name = "Alice";
+                                                  ^
+university_db=> SELECT * FROM students WHERE first_name = 'Alice';
+ student_id | first_name | last_name |          email          |    dob
+------------+------------+-----------+-------------------------+------------
+          1 | Alice      | Smith     | alice.smith@example.com | 2003-05-15
+(1 row)
+
+
+university_db=> SELECT * FROM students WHERE student_id = 1;
+ student_id | first_name | last_name |          email          |    dob
+------------+------------+-----------+-------------------------+------------
+          1 | Alice      | Smith     | alice.smith@example.com | 2003-05-15
+(1 row)
+
+
+university_db=> SELECT first_name, last_name FROM students WHERE last_name = 'Smith';
+ first_name | last_name
+------------+-----------
+ Alice      | Smith
+(1 row)
+
+
+university_db=> SELECT * FROM students WHERE dob >= '2004-06-28';
+ student_id | first_name | last_name |           email           |    dob
+------------+------------+-----------+---------------------------+------------
+          4 | Keerthi    | Kelam     | keerhti.kelam@example.com | 2004-06-28
+(1 row)
+
+
+university_db=> SELECT * FROM students WHERE dob BETWEEN '2002-02-01' AND '2002-11-31';
+ERROR:  date/time field value out of range: "2002-11-31"
+LINE 1: ... FROM students WHERE dob BETWEEN '2002-02-01' AND '2002-11-3...
+                                                             ^
+university_db=> SELECT * FROM students WHERE dob BETWEEN '2002-01-01' AND '1995-12-31';
+ student_id | first_name | last_name | email | dob
+------------+------------+-----------+-------+-----
+(0 rows)
+
+
+university_db=> SELECT * FROM students WHERE first_name LIKE 'A%';
+ student_id | first_name | last_name |          email          |    dob
+------------+------------+-----------+-------------------------+------------
+          1 | Alice      | Smith     | alice.smith@example.com | 2003-05-15
+(1 row)
+
+
+university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob)
+university_db-> VALUES (6, 'Anil);
+university_db'>
+university_db'> INSERT INTO students (student_id, first_name, last_name, email, dob)
+university_db'> VALUES (6, 'Anil');
+university_db'> ;
+university_db'> ;;
+university_db'> exit
+Use control-C to quit.
+university_db'> \q
+
+C:\Users\Minfy>psql -U keerthikelam -d university_db
+Password for user keerthikelam:
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "keerthikelam"
+
+C:\Users\Minfy>psql -U keerthikelam -d university_db
+Password for user keerthikelam:
+psql (17.5)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob)
+university_db-> VALUES (6, 'anil');
+ERROR:  INSERT has more target columns than expressions
+LINE 1: INSERT INTO students (student_id, first_name, last_name, ema...
+                                                      ^
+university_db=> INSERT INTO students (student_id, first_name)
+university_db-> VALUES (6, 'anil');
+INSERT 0 1
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          6 | anil        |           |                           |
+(6 rows)
+
+
+university_db=> SELECT * FROM students WHERE first_name LIKE 'A%';
+ student_id | first_name | last_name |          email          |    dob
+------------+------------+-----------+-------------------------+------------
+          1 | Alice      | Smith     | alice.smith@example.com | 2003-05-15
+(1 row)
+
+
+university_db=> SELECT * FROM students WHERE first_name ILIKE 'A%';
+ student_id | first_name | last_name |          email          |    dob
+------------+------------+-----------+-------------------------+------------
+          1 | Alice      | Smith     | alice.smith@example.com | 2003-05-15
+          6 | anil       |           |                         |
+(2 rows)
+
+
+university_db=> SELECT * FROM students WHERE email ILIKE '%.com';
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(5 rows)
+
+
+university_db=> SELECT * FROM students WHERE first_name = 'Alice' AND last_name = 'Smith';
+ student_id | first_name | last_name |          email          |    dob
+------------+------------+-----------+-------------------------+------------
+          1 | Alice      | Smith     | alice.smith@example.com | 2003-05-15
+(1 row)
+
+
+university_db=> SELECT * FROM students WHERE student_id = 1 OR student_id = 3;
+ student_id | first_name | last_name |           email           |    dob
+------------+------------+-----------+---------------------------+------------
+          1 | Alice      | Smith     | alice.smith@example.com   | 2003-05-15
+          3 | Charlie    | Brown     | charlie.brown@example.com | 2003-01-10
+(2 rows)
+
+
+university_db=> SELECT * FROM students WHERE student_id IN (1, 3, 5);
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(3 rows)
+
+
+university_db=> INSERT INTO students (student_id, first_name, last_name, dob) VALUES (4, 'Diana', 'Prince', '2001-11-01');
+INSERT 0 1
+university_db=>
+university_db=> SELECT * FROM students WHERE email IS NULL;
+ student_id | first_name | last_name | email |    dob
+------------+------------+-----------+-------+------------
+          6 | anil       |           |       |
+          4 | Diana      | Prince    |       | 2001-11-01
+(2 rows)
+
+
+university_db=>
+university_db=> SELECT * FROM students WHERE email IS NOT NULL;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(5 rows)
+
+
+university_db=> SELECT * FROM students WHERE student_id = 2.33;
+ student_id | first_name | last_name | email | dob
+------------+------------+-----------+-------+-----
+(0 rows)
+
+
+university_db=> SELECT * FROM students WHERE student_id = 2;
+ student_id | first_name | last_name |          email          |    dob
+------------+------------+-----------+-------------------------+------------
+          2 | Bob        | Johnson   | bob.johnson@example.com | 2002-08-22
+(1 row)
+
+
+university_db=> SELECT * FROM students WHERE dob < '2003-01-2003'
+university_db-> SELECT * FROM students WHERE dob < '2003-01-01'
+university_db-> ;
+ERROR:  syntax error at or near "SELECT"
+LINE 2: SELECT * FROM students WHERE dob < '2003-01-01'
+        ^
+university_db=> SELECT * FROM students WHERE dob < '2003-01-01';
+ student_id | first_name | last_name |          email          |    dob
+------------+------------+-----------+-------------------------+------------
+          2 | Bob        | Johnson   | bob.johnson@example.com | 2002-08-22
+          4 | Diana      | Prince    |                         | 2001-11-01
+(2 rows)
+
+
+university_db=> SELECT * FROM students WHERE dob LIKE 'B%' OR dob LIKE '%c;
+university_db'> ;
+university_db'> ';
+ERROR:  operator does not exist: date ~~ unknown
+LINE 1: SELECT * FROM students WHERE dob LIKE 'B%' OR dob LIKE '%c;
+                                         ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+university_db=> SELECT * FROM students WHERE dob LIKE 'B%' OR dob LIKE '%C';
+ERROR:  operator does not exist: date ~~ unknown
+LINE 1: SELECT * FROM students WHERE dob LIKE 'B%' OR dob LIKE '%C';
+                                         ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+university_db=> SELECT * FROM students WHERE first_name LIKE '%B' OR first_name LIKE '%C';
+ student_id | first_name | last_name | email | dob
+------------+------------+-----------+-------+-----
+(0 rows)
+
+
+university_db=> SELECT * FROM students WHERE first_name LIKE 'B%' OR first_name LIKE 'C%';
+ student_id | first_name | last_name |           email           |    dob
+------------+------------+-----------+---------------------------+------------
+          2 | Bob        | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie    | Brown     | charlie.brown@example.com | 2003-01-10
+(2 rows)
+
+
+university_db=> SELECT * FROM students WHERE email LIKE '%example.com';
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(5 rows)
+
+
+university_db=> SELECT * FROM students WHERE email IS NULL;
+ student_id | first_name | last_name | email |    dob
+------------+------------+-----------+-------+------------
+          6 | anil       |           |       |
+          4 | Diana      | Prince    |       | 2001-11-01
+(2 rows)
+
+
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          6 | anil        |           |                           |
+          4 | Diana       | Prince    |                           | 2001-11-01
+(7 rows)
+
+
+university_db=> UPDATE students
+university_db-> SET email = 'keerthi.kelam@example.net'
+university_db-> WHERE student_id = 4;
+ERROR:  duplicate key value violates unique constraint "unique_email"
+DETAIL:  Key (email)=(keerthi.kelam@example.net) already exists.
+university_db=> UPDATE students
+university_db-> SET email = 'keerthi.kelam@example.nets'
+university_db-> WHERE student_id = 4;
+ERROR:  duplicate key value violates unique constraint "unique_email"
+DETAIL:  Key (email)=(keerthi.kelam@example.nets) already exists.
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          6 | anil        |           |                           |
+          4 | Diana       | Prince    |                           | 2001-11-01
+(7 rows)
+
+
+university_db=> UPDATE students
+university_db-> SET email = 'diana.prince@example.net'
+university_db-> WHERE student_id = 4;
+ERROR:  duplicate key value violates unique constraint "unique_email"
+DETAIL:  Key (email)=(diana.prince@example.net) already exists.
+university_db=> UPDATE students
+university_db-> SET email = 'keerthi.kelam@example.nets'
+university_db-> UPDATE students
+university_db-> SET first_name = 'Diana'
+university_db-> SET first_name = 'Diana'
+university_db-> ;
+ERROR:  syntax error at or near "UPDATE"
+LINE 3: UPDATE students
+        ^
+university_db=> UPDATE students
+university_db-> SET student_id = 7
+university_db-> WHERE first_name = 'Diana';
+UPDATE 1
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2003-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          6 | anil        |           |                           |
+          7 | Diana       | Prince    |                           | 2001-11-01
+(7 rows)
+
+
+university_db=> UPDATE students
+university_db-> SET email = 'diana.prince@example.net'
+university_db-> WHERE student_id = 7;
+UPDATE 1
+university_db=> UPDATE students
+university_db-> SET dob = '2002-05-15'
+university_db-> WHERE student_id = 1;
+UPDATE 1
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          6 | anil        |           |                           |
+          7 | Diana       | Prince    | diana.prince@example.net  | 2001-11-01
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+(7 rows)
+
+
+university_db=> UPDATE students
+university_db-> SET dob = '2003-02-15'
+university_db-> WHERE student_id = 4;
+UPDATE 1
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-01-10
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          6 | anil        |           |                           |
+          7 | Diana       | Prince    | diana.prince@example.net  | 2001-11-01
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2003-02-15
+(7 rows)
+
+
+university_db=> UPDATE students
+university_db-> SET dob = '2004-06-28'
+university_db-> WHERE student_id = 4;
+UPDATE 1
+university_db=> UPDATE students
+university_db-> SET dob = '2002-05-15'
+university_db-> WHERE student_id = ;
+ERROR:  syntax error at or near ";"
+LINE 3: WHERE student_id = ;
+                           ^
+university_db=> UPDATE students
+university_db-> SET dob = '2003-02-15'
+university_db-> WHERE first_name = 'Charlie';
+UPDATE 1
+university_db=> UPDATE students
+university_db-> SET email = 'diana.prince@example.org'
+university_db-> WHERE student_id = 7;
+UPDATE 1
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          6 | anil        |           |                           |
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          7 | Diana       | Prince    | diana.prince@example.org  | 2001-11-01
+(7 rows)
+
+
+university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob)
+university_db-> VALUES (99, 'Temp', 'User', 'temp@example.com', '2000-01-01');
+INSERT 0 1
+university_db=> SELECT * FROM students WHERE student_id = 99;
+ student_id | first_name | last_name |      email       |    dob
+------------+------------+-----------+------------------+------------
+         99 | Temp       | User      | temp@example.com | 2000-01-01
+(1 row)
+
+
+university_db=> DELETE FROM students WHERE student_id = 99;
+DELETE 1
+university_db=> SELECT * FROM students WHERE student_id = 99;
+ student_id | first_name | last_name | email | dob
+------------+------------+-----------+-------+-----
+(0 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY last_name ASC;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          7 | Diana       | Prince    | diana.prince@example.org  | 2001-11-01
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          6 | anil        |           |                           |
+(7 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY last_name ASC;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          7 | Diana       | Prince    | diana.prince@example.org  | 2001-11-01
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          6 | anil        |           |                           |
+(7 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY first_name ASC;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          6 | anil        |           |                           |
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          7 | Diana       | Prince    | diana.prince@example.org  | 2001-11-01
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(7 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY dob DESC;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          6 | anil        |           |                           |
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          7 | Diana       | Prince    | diana.prince@example.org  | 2001-11-01
+(7 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY first_name, last_name;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          6 | anil        |           |                           |
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          7 | Diana       | Prince    | diana.prince@example.org  | 2001-11-01
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(7 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY dob ASC;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          7 | Diana       | Prince    | diana.prince@example.org  | 2001-11-01
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          6 | anil        |           |                           |
+(7 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY last_name DESC, first_name ASC;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          6 | anil        |           |                           |
+          1 | Alice       | Smith     | alice.smith@example.com   | 2002-05-15
+          7 | Diana       | Prince    | diana.prince@example.org  | 2001-11-01
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          2 | Bob         | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(7 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY dob DESC LIMIT 3;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          6 | anil        |           |                           |
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(3 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY student_id LIMIT 3 OFFSET 2;
+ student_id | first_name  | last_name |           email           |    dob
+------------+-------------+-----------+---------------------------+------------
+          3 | Charlie     | Brown     | charlie.brown@example.com | 2003-02-15
+          4 | Keerthi     | Kelam     | keerhti.kelam@example.com | 2004-06-28
+          5 | Meghana sai | Bhima     | meghanasai@example.com    | 2003-12-22
+(3 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY student_id LIMIT 2 OFFSET 2;
+ student_id | first_name | last_name |           email           |    dob
+------------+------------+-----------+---------------------------+------------
+          3 | Charlie    | Brown     | charlie.brown@example.com | 2003-02-15
+          4 | Keerthi    | Kelam     | keerhti.kelam@example.com | 2004-06-28
+(2 rows)
+
+
+university_db=> SELECT * FROM students dob DESC LIMIT 2;
+ERROR:  syntax error at or near "DESC"
+LINE 1: SELECT * FROM students dob DESC LIMIT 2;
+                                   ^
+university_db=> SELECT * FROM students ORDER BY dob DESC LIMIT 2;
+ student_id | first_name | last_name |           email           |    dob
+------------+------------+-----------+---------------------------+------------
+          6 | anil       |           |                           |
+          4 | Keerthi    | Kelam     | keerhti.kelam@example.com | 2004-06-28
+(2 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY dob ASC LIMIT 2;
+ student_id | first_name | last_name |          email           |    dob
+------------+------------+-----------+--------------------------+------------
+          7 | Diana      | Prince    | diana.prince@example.org | 2001-11-01
+          1 | Alice      | Smith     | alice.smith@example.com  | 2002-05-15
+(2 rows)
+
+
+university_db=> SELECT * FROM students ORDER BY student_id ASC LIMIT 2 OFFSET 1;
+ student_id | first_name | last_name |           email           |    dob
+------------+------------+-----------+---------------------------+------------
+          2 | Bob        | Johnson   | bob.johnson@example.com   | 2002-08-22
+          3 | Charlie    | Brown     | charlie.brown@example.com | 2003-02-15
+(2 rows)
 
-![image](https://github.com/user-attachments/assets/e925969e-e370-4a3d-81f4-7780a4acb618)
-
-![image](https://github.com/user-attachments/assets/5c0f292c-10d2-452a-b9e0-008b65f3c705)
-
-![image](https://github.com/user-attachments/assets/deeafc4f-a59f-4f74-b0d4-44a5b20f67ca)
-
-![image](https://github.com/user-attachments/assets/d93ead44-7518-443f-923e-dc33ac6ca24c)
-
-Inserting values into the students table:
-![image](https://github.com/user-attachments/assets/b4935355-6011-4e35-80fa-7ed6bbbbb85e)
-
-![image](https://github.com/user-attachments/assets/0a49897e-2258-41c6-bcb7-44111f54ad79)
-
-
-Selecting columns in the table:
-
-![image](https://github.com/user-attachments/assets/c90e21ea-ea90-48db-90f6-86715bdff91d)
-
-Where clause:
-
-![image](https://github.com/user-attachments/assets/455c1110-2b02-41c2-a33e-525db164f66a)
-
-![image](https://github.com/user-attachments/assets/8a89e8f9-7748-4540-bccb-f91fa66da095)
-
-Between:
-
-![image](https://github.com/user-attachments/assets/f1741cca-bfb5-4dec-b83a-d3c142374bfb)
-
-LIKE:
-
-![image](https://github.com/user-attachments/assets/eeba34ea-1249-4eba-937c-8d96adf8c4c6)
-
-![image](https://github.com/user-attachments/assets/9a74a082-3625-4e0f-ba99-e1f4a019c190)
-
-![image](https://github.com/user-attachments/assets/24b0a84a-e05c-432f-b947-d87c4dd8b402)
-
-![image](https://github.com/user-attachments/assets/0036815b-882a-4cef-8dd5-5e8064c63e66)
-
-IN:
-
-![image](https://github.com/user-attachments/assets/4e616440-8f91-4cd1-b865-7214aee7857e)
-
-![image](https://github.com/user-attachments/assets/6e1d7eb8-84dd-4ffc-8436-7eccb259a891)
-
-IS NULL and IS NOT NULL
-
-![image](https://github.com/user-attachments/assets/5b615638-cb79-4612-bcb5-f59b1792848b)
-
-
-- **Activity:**  practice various `SELECT` queries with `WHERE` clauses:
-    - Find the student with `student_id` 2.33
-
-![image](https://github.com/user-attachments/assets/df6061b4-e8d6-4b99-8566-dfe814b388ae)
-
-
-    - Find all students born before January 1st, 2003.
- 
-![image](https://github.com/user-attachments/assets/9c06f501-5209-4bff-a5ed-a04590aa35e1)
-
-
-    - Find students whose first name starts with 'B' or 'C'.
-
-![image](https://github.com/user-attachments/assets/7966863e-32fe-4bf4-944b-60f2bdd9a44e)
-
-
-    - Find students whose email address is from `example.com`.
-
-![image](https://github.com/user-attachments/assets/01a25cbb-c314-4b12-8cdf-e8296969dd60)
-
-
-    - Find students who do *not* have an email address listed.
-
-![image](https://github.com/user-attachments/assets/d28760ba-058a-4f17-91a7-4190e57af17f)
-
-
-
-
-UPDATE
-
-![image](https://github.com/user-attachments/assets/e0f778fa-8d94-4e48-b639-38cc2e025b4e)
-
-
-ACTIVITY:
-
-![image](https://github.com/user-attachments/assets/7e0f340b-3149-4be8-8d45-946820f427d4)
-
-
-
-
-
-
-DELETE:
-
-![image](https://github.com/user-attachments/assets/f555fb08-740d-4fc9-ae4a-c7bc9f658cd8)
-
-
-ORDER BY:
-
-
-![image](https://github.com/user-attachments/assets/a1fd1299-d430-4420-ba43-b2e79d85c97e)
-
-![image](https://github.com/user-attachments/assets/8cd16ca4-5a93-45ce-816d-4af6113863d3)
-
-![image](https://github.com/user-attachments/assets/422f8f4d-dc02-441b-b50a-6d4a52c749cc)
-
-
-ACTIVITY:
-
-- List all students ordered by their date of birth, oldest first.
-
-![image](https://github.com/user-attachments/assets/6630c653-e841-446f-9859-518c99758b2f)
-
-- List all students ordered by last name descending, then by first name ascending.
-
-![image](https://github.com/user-attachments/assets/a947a32c-2bd6-4954-8050-eea4d16c95a1)
-
-
-LIMIT and OFFSET:
-
-![image](https://github.com/user-attachments/assets/e5b85952-7407-42b1-b0a7-17177258a6a6)
-
-![image](https://github.com/user-attachments/assets/d40dd649-b3b2-4bed-8c4e-253c71f230d8)
-
-
-ACTIVITY:
-
-
-- Find the two students who were born earliest (oldest two).
-
-![image](https://github.com/user-attachments/assets/02240abf-9531-4b08-823e-5d680c919e3c)
-
-
-- List students, skipping the first one and showing the next two, ordered by `student_id`.
-
-![image](https://github.com/user-attachments/assets/aa34c6d8-6452-41dd-be5b-3b4f56f56643)
-
-
-
-Removing Duplicates: DISTINCT
 
 university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob)
 university_db-> VALUES (5, 'Eve', 'Smith', 'eve.smith@example.com', '2004-07-01');
@@ -158,9 +982,6 @@ university_db=> SELECT last_name FROM students;
  Prince
  Smith
 (8 rows)
-
-
-![image](https://github.com/user-attachments/assets/bb06e4ed-34ce-478b-8581-2939b2579c96)
 
 
 university_db=> SELECT DISTINCT last_name FROM students ORDER BY last_name;
@@ -190,14 +1011,6 @@ university_db=> SELECT DISTINCT last_name, first_name FROM students;
 (8 rows)
 
 
-![image](https://github.com/user-attachments/assets/7f87522e-23be-4e6b-9803-c8e77d0a532d)
-
-
-ACTIVITY:
-
-Get a list of unique birth years from the students table.
-
-
 university_db=> SELECT DISTINCT dob FROM students ORDER BY dob;
     dob
 ------------
@@ -212,7 +1025,10 @@ university_db=> SELECT DISTINCT dob FROM students ORDER BY dob;
 (8 rows)
 
 
-
+university_db=> SELECT DISTINCT EXTRACT(YEAR FROM dob) AS birth_years FROM students ORDER BY dob;
+ERROR:  for SELECT DISTINCT, ORDER BY expressions must appear in select list
+LINE 1: ...CT(YEAR FROM dob) AS birth_years FROM students ORDER BY dob;
+                                                                   ^
 university_db=> SELECT DISTINCT EXTRACT(YEAR FROM dob) AS birth_years FROM students ORDER BY birth_years;
  birth_years
 -------------
@@ -223,17 +1039,6 @@ university_db=> SELECT DISTINCT EXTRACT(YEAR FROM dob) AS birth_years FROM stude
 
 (5 rows)
 
-
-
-
-
-![image](https://github.com/user-attachments/assets/45f34643-5334-4001-b671-79f33fdc7261)
-
-![image](https://github.com/user-attachments/assets/4e648f8b-6b40-40fb-a1b9-8dd4aa609708)
-
-
-
-Aggregate Functions:
 
 university_db=> SELECT COUNT(*) AS total_students FROM students;
  total_students
@@ -270,26 +1075,12 @@ university_db=> SELECT MAX(dob) AS youngest_student_dob FROM students;
 (1 row)
 
 
-![image](https://github.com/user-attachments/assets/da4e8b9b-ffc8-458f-b0c9-519e233eebd2)
-
-
-![image](https://github.com/user-attachments/assets/55a8345c-8441-4a08-856d-61bf4f6fecbf)
-
-
-ACTIVITY:
-
-- Count how many students are in the `students` table.
-
 university_db=> SELECT COUNT(*) AS total_students FROM students;
  total_students
 ----------------
               8
 (1 row)
 
-![image](https://github.com/user-attachments/assets/b2472d08-770b-4aa3-9944-0f6054a463c0)
-
-
-- Find the earliest (minimum) date of birth.
 
 university_db=> SELECT MIN(dob) AS oldest_student_dob FROM students;
  oldest_student_dob
@@ -297,20 +1088,12 @@ university_db=> SELECT MIN(dob) AS oldest_student_dob FROM students;
  2001-11-01
 (1 row)
 
-![image](https://github.com/user-attachments/assets/7767afbc-d902-481c-8dba-6d322d41b390)
-
-  
-- Count how many distinct last names there are.
 
 university_db=> SELECT COUNT(DISTINCT last_name) AS unique_last_names FROM students;
  unique_last_names
 -------------------
                  6
 (1 row)
-
-![image](https://github.com/user-attachments/assets/728e43be-aa46-405b-bcd0-e181c6142b5c)
-
-
 
 
 university_db=> SELECT * FROM students;
@@ -327,14 +1110,29 @@ university_db=> SELECT * FROM students;
 (8 rows)
 
 
+university_db=> SELECT COUNT(*)
+university_db-> ;
+ count
+-------
+     1
+(1 row)
 
-![image](https://github.com/user-attachments/assets/5ff1aa05-dac0-49bf-8884-16e7422aab46)
 
+university_db=> SELECT COUNT(*) AS number_of_students
+university_db-> FROM students
+university_db-> GROUP BY last_name
+university_db-> ORDER BY number_of_students DESC;
+ number_of_students
+--------------------
+                  2
+                  1
+                  1
+                  1
+                  1
+                  1
+                  1
+(7 rows)
 
-
-GROUP BY:
-
--- Count students for each last name
 
 university_db=> SELECT last_name, COUNT(*) AS number_of_students
 university_db-> FROM students
@@ -352,41 +1150,30 @@ university_db-> ORDER BY number_of_students DESC;
 (7 rows)
 
 
-![image](https://github.com/user-attachments/assets/bb5ddf67-2f70-4dba-ac37-2a5d3875cccc)
-
-
--- Count students for each last name, only for last names with more than one student
-
-university_db=> SELECT last_name, COUNT(*) AS number_of_students
+university_db=> SELECT fisrt_name, COUNT(*) AS number_of_students
 university_db-> FROM students
 university_db-> GROUP BY last_name
-university_db-> HAVING COUNT(*) > 1
 university_db-> ORDER BY number_of_students DESC;
- last_name | number_of_students
------------+--------------------
- Smith     |                  2
-(1 row)
-
-
-![image](https://github.com/user-attachments/assets/22decd18-924a-4ed1-8d12-55b81c7f8d76)
-
-
--- PostgreSQL specific way to get year from date: EXTRACT(YEAR FROM date_column)
-
-SELECT EXTRACT(YEAR FROM dob) AS birth_year, COUNT(*) AS students_in_year
-FROM students
-WHERE dob IS NOT NULL
-GROUP BY birth_year
-ORDER BY birth_year;
-
-
-![image](https://github.com/user-attachments/assets/5440d8fa-ea11-4da1-82e3-bb349592edc2)
-
-
-- **Activity:**
-    - Count the number of students for each distinct first`_name`.
-
- university_db=> SELECT first_name, COUNT(*) AS number_of_students
+ERROR:  column "fisrt_name" does not exist
+LINE 1: SELECT fisrt_name, COUNT(*) AS number_of_students
+               ^
+HINT:  Perhaps you meant to reference the column "students.first_name".
+university_db=> SELECT last_name, COUNT(*) AS number_of_students
+university_db-> FROM students
+university_db-> GROUP BY first_name
+university_db-> ORDER BY number_of_students DESC;
+ERROR:  column "students.last_name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT last_name, COUNT(*) AS number_of_students
+               ^
+university_db=> SELECT fisrt_name, COUNT(*) AS number_of_students
+university_db-> FROM students
+university_db-> GROUP BY first_name
+university_db-> ORDER BY number_of_students DESC;
+ERROR:  column "fisrt_name" does not exist
+LINE 1: SELECT fisrt_name, COUNT(*) AS number_of_students
+               ^
+HINT:  Perhaps you meant to reference the column "students.first_name".
+university_db=> SELECT first_name, COUNT(*) AS number_of_students
 university_db-> FROM students
 university_db-> GROUP BY first_name
 university_db-> ORDER BY number_of_students DESC;
@@ -403,10 +1190,45 @@ university_db-> ORDER BY number_of_students DESC;
 (8 rows)
 
 
-![image](https://github.com/user-attachments/assets/0aa0b4c3-5b26-4c53-aaab-46c50e99f753)
+university_db=> SELECT EXTRACT(YEAR FROM dob) AS birth_years
+university_db-> ;
+ERROR:  column "dob" does not exist
+LINE 1: SELECT EXTRACT(YEAR FROM dob) AS birth_years
+                                 ^
+university_db=> SELECT first_name, EXTRACT(YEAR FROM dob) AS birth_years
+university_db-> FROM students
+university_db-> GROUP BY birth_years
+university_db-> ;
+ERROR:  column "students.first_name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT first_name, EXTRACT(YEAR FROM dob) AS birth_years
+               ^
+university_db=> SELECT first_name, EXTRACT(YEAR FROM dob) AS birth_years
+university_db-> FROM students
+university_db-> GROUP BY birth_years, first_name;
+ first_name  | birth_years
+-------------+-------------
+ anil        |
+ Charlie     |        2003
+ Alice       |        2002
+ Meghana sai |        2003
+ Eve         |        2004
+ Diana       |        2001
+ Bob         |        2002
+ Keerthi     |        2004
+(8 rows)
 
 
-    - Find the number of students born in each year.
+university_db=> SELECT EXTRACT(YEAR FROM dob) AS birth_years, COUNT(EXTRACT(YEAR FROM dob)) AS count
+university_db-> FROM students
+university_db-> GROUP BY birth_years;
+ birth_years | count
+-------------+-------
+             |     0
+        2003 |     2
+        2002 |     2
+        2001 |     1
+        2004 |     2
+(5 rows)
 
 
 university_db=> SELECT EXTRACT(YEAR FROM dob) AS birth_years, COUNT(*) AS count
@@ -421,14 +1243,50 @@ university_db-> GROUP BY birth_years;
         2004 |     2
 (5 rows)
 
-![image](https://github.com/user-attachments/assets/cb42de34-474b-4c2a-b055-91567d1886f2)
+
+university_db=> SELECT last_name, COUNT(*) AS number_of_students
+university_db-> FROM students
+university_db-> GROUP BY last_name
+university_db-> HAVING COUNT(*) > 1
+university_db-> ORDER BY number_of_students DESC;
+ last_name | number_of_students
+-----------+--------------------
+ Smith     |                  2
+(1 row)
 
 
-Activity:
+university_db=> SELECT EXTRACT(YEAR FROM dob) AS birth_year, COUNT(*) AS students_in_year
+university_db-> FROM students
+university_db-> WHERE dob IS NOT NULL
+university_db-> GROUP BY birth_year
+university_db-> ORDER BY birth_year;
+ birth_year | students_in_year
+------------+------------------
+       2001 |                1
+       2002 |                2
+       2003 |                2
+       2004 |                2
+(4 rows)
 
 
-DROPPING THE TABLE AND CREATING IT AGAIN WITH CONSTRAINTS:
-
+university_db=> DROP TABLE students;
+DROP TABLE
+university_db=> SELECT * FROM students;
+ERROR:  relation "students" does not exist
+LINE 1: SELECT * FROM students;
+                      ^
+university_db=> DROP TABLE IF EXISTS students; -- Start fresh for constraint examples
+NOTICE:  table "students" does not exist, skipping
+DROP TABLE
+university_db=> CREATE TABLE students (
+university_db(>     student_id INTEGER,
+university_db(>     first_name VARCHAR(50) NOT NULL, -- first_name cannot be NULL
+university_db(>     last_name VARCHAR(50) NOT NULL,
+university_db(>     email VARCHAR(100) UNIQUE,      -- email must be unique (and can be NULL by default for UNIQUE)
+university_db(>     dob DATE,
+university_db(>     enrollment_status VARCHAR(10) CHECK (enrollment_status IN ('enrolled', 'graduated', 'dropped'))
+university_db(> );
+CREATE TABLE
 university_db=> DROP TABLE IF EXISTS students;
 DROP TABLE
 university_db=> CREATE TABLE students (
@@ -440,41 +1298,17 @@ university_db(>     dob DATE,
 university_db(>     enrollment_status VARCHAR(10) CHECK (enrollment_status IN ('enrolled', 'graduated', 'dropped'))
 university_db(> );
 CREATE TABLE
-
-
-![image](https://github.com/user-attachments/assets/80375946-fe18-44df-89e4-537baf782465)
-
-
-
-
-**-- Try inserting data that violates these:**
-
 university_db=> INSERT INTO students (student_id, last_name, email, dob) VALUES (1, 'Test', 'test@test.com', '2000-01-01');
 ERROR:  null value in column "first_name" of relation "students" violates not-null constraint
 DETAIL:  Failing row contains (1, null, Test, test@test.com, 2000-01-01, null).
-
-
 university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob) VALUES (1, 'Test', 'User', 'test@test.com', '2000-01-01');
 INSERT 0 1
-
-
 university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob) VALUES (2, 'Another', 'User', 'test@test.com', '2001-01-01');
 ERROR:  duplicate key value violates unique constraint "students_email_key"
 DETAIL:  Key (email)=(test@test.com) already exists.
-
 university_db=> INSERT INTO students (student_id, first_name, last_name, email, dob, enrollment_status) VALUES (2, 'Another', 'User', 'another@test.com', '2001-01-01', 'pending');
 ERROR:  new row for relation "students" violates check constraint "students_enrollment_status_check"
 DETAIL:  Failing row contains (2, Another, User, another@test.com, 2001-01-01, pending).
-
-
-![image](https://github.com/user-attachments/assets/30b077ef-0dfc-410c-b51f-9efe9b9d4ba8)
-
-
-
-KEYS:
-Activity: 
-
-
 university_db=> DROP TABLE IF EXISTS students;
 DROP TABLE
 university_db=> CREATE TABLE students (
@@ -486,11 +1320,6 @@ university_db(>     dob DATE,
 university_db(>     enrollment_status VARCHAR(20) CHECK (enrollment_status IN ('enrolled', 'graduated', 'dropped', 'pending'))
 university_db(> );
 CREATE TABLE
-
-
-![image](https://github.com/user-attachments/assets/ce3bbaab-546c-4201-9264-1a52c152fa5e)
-
-
 university_db=> INSERT INTO students (first_name, last_name, email, dob, enrollment_status)
 university_db-> VALUES ('Alice', 'Smith', 'alice.smith@example.com', '2003-05-15', 'enrolled');
 INSERT 0 1
@@ -509,16 +1338,14 @@ university_db=> SELECT * FROM students;
 (3 rows)
 
 
-![image](https://github.com/user-attachments/assets/e1cbbb8c-1f9a-4b32-a68d-7c7ba511f9db)
-
-
-
-- Try inserting a student without an email. (Should work if `UNIQUE` constraint on email allows NULLs, which it does by default).
-
+university_db=> INSERT INTO students (first_name, last_name, email, dob, enrollment_status)
+university_db-> VALUES ('Charlie', 'Brown', '2003-01-10', 'pending');
+ERROR:  INSERT has more target columns than expressions
+LINE 1: ...INTO students (first_name, last_name, email, dob, enrollment...
+                                                             ^
 university_db=> INSERT INTO students (first_name, last_name, dob, enrollment_status)
 university_db-> VALUES ('Sai', 'Brown', '2003-01-10', 'pending');
 INSERT 0 1
-
 university_db=> SELECT * FROM students;
  student_id | first_name | last_name |           email           |    dob     | enrollment_status
 ------------+------------+-----------+---------------------------+------------+-------------------
@@ -528,37 +1355,51 @@ university_db=> SELECT * FROM students;
           4 | Sai        | Brown     |                           | 2003-01-10 | pending
 (4 rows)
 
-![image](https://github.com/user-attachments/assets/4d1759ad-937e-4734-90c0-346e81f933e8)
-
-
-- Try inserting a student with a duplicate email to one already existing. (Should fail due to `UNIQUE` constraint).
 
 university_db=> INSERT INTO students (first_name, last_name, email, dob, enrollment_status)
 university_db-> VALUES ('Charliechar', 'BrownBear', 'charlie.brown@example.com', '2003-01-10', 'pending');
 ERROR:  duplicate key value violates unique constraint "students_email_key"
 DETAIL:  Key (email)=(charlie.brown@example.com) already exists.
-
-![image](https://github.com/user-attachments/assets/bfc601c1-a16d-4161-911d-a690065e0497)
-
-  
-- Try inserting a student with a `NULL` first name. (Should fail due to `NOT NULL` constraint).
-
+university_db=> INSERT INTO students (first_name, last_name, email, dob, enrollment_status)
+university_db-> VALUES ('Charliechar', 'BrownBear', 'charlie.brown@example.com', '2003-01-10');
+ERROR:  INSERT has more target columns than expressions
+LINE 1: ...INTO students (first_name, last_name, email, dob, enrollment...
+                                                             ^
+university_db=> INSERT INTO students (last_name, email, dob, enrollment_status)
+university_db-> VALUES ('BrownBear', 'charlie.brown@example.com', '2003-01-10');
+ERROR:  INSERT has more target columns than expressions
+LINE 1: INSERT INTO students (last_name, email, dob, enrollment_stat...
+                                                     ^
 university_db=> INSERT INTO students (last_name, email, dob, enrollment_status)
 university_db-> VALUES ('BrownBear', 'charlie.brown@example.com', '2003-01-10', 'pending');
 ERROR:  null value in column "first_name" of relation "students" violates not-null constraint
 DETAIL:  Failing row contains (6, null, BrownBear, charlie.brown@example.com, 2003-01-10, pending).
+university_db=> INSERT INTO students (first_name, last_name, email, dob, enrollment_status)
+university_db-> VALUES ('Charliechar', 'BrownBear', 'charlie.brown@example.com', '2003-01-10', 'pending');
+ERROR:  duplicate key value violates unique constraint "students_email_key"
+DETAIL:  Key (email)=(charlie.brown@example.com) already exists.
+university_db=> INSERT INTO students (first_name, last_name, email, dob, enrollment_status)
+university_db-> VALUES ('Charliechar', 'BrownBear', 'ccharlie.brown@example.com', '2003-01-10', 'pending');
+INSERT 0 1
+university_db=> SELECT * FROM students;
+ student_id | first_name  | last_name |           email            |    dob     | enrollment_status
+------------+-------------+-----------+----------------------------+------------+-------------------
+          1 | Alice       | Smith     | alice.smith@example.com    | 2003-05-15 | enrolled
+          2 | Robert      | Johnson   | robert.j@example.com       | 2002-08-22 | enrolled
+          3 | Charlie     | Brown     | charlie.brown@example.com  | 2003-01-10 | pending
+          4 | Sai         | Brown     |                            | 2003-01-10 | pending
+          8 | Charliechar | BrownBear | ccharlie.brown@example.com | 2003-01-10 | pending
+(5 rows)
 
-![image](https://github.com/user-attachments/assets/8621100a-dcfd-4099-aea2-6403927a0160)
 
-
-- **Creating Tables for a Many-to-Many Relationship (Students and Courses):**
-
-- Activity:
-
-  
-    1. **`courses` Table:**
-
-
+university_db=> CREATE TABLE courses (
+university_db(>     course_id SERIAL PRIMARY KEY,
+university_db(>     course_name VARCHAR(100) NOT NULL UNIQUE,
+university_db(>     credits INTEGER CHECK (credits > 0 AND credits < 10) -- Example of CHECK
+university_db(> );
+CREATE TABLE
+university_db=> DROP TABLE courses;
+DROP TABLE
 university_db=> CREATE TABLE courses (
 university_db(>     course_id SERIAL PRIMARY KEY,
 university_db(>     course_name VARCHAR(100) NOT NULL UNIQUE,
@@ -573,13 +1414,6 @@ university_db=> INSERT INTO courses (course_name, credits) VALUES ('Web Developm
 INSERT 0 1
 university_db=> INSERT INTO courses (course_name, credits) VALUES ('Data Structures', 4);
 INSERT 0 1
-
-![image](https://github.com/user-attachments/assets/35a33e3d-3bc7-459f-8ead-bf308bee9db7)
-
-
-
-2. **enrollments Table (Junction Table for Students and Courses):**
-
 university_db=> CREATE TABLE enrollments (
 university_db(>     enrollment_id SERIAL PRIMARY KEY,
 university_db(>     student_id INTEGER NOT NULL,
@@ -607,38 +1441,16 @@ university_db=> SELECT * FROM enrollments;
 (0 rows)
 
 
-![image](https://github.com/user-attachments/assets/3a1fee1d-67be-4f46-b7a3-b1ed3a358e4b)
-
-
--- Try to insert an enrollment for a student_id that doesn't exist in students (e.g., student_id 999). It should fail due to FK constraint.
-
 university_db=> INSERT INTO enrollments (student_id, course_id, grade) VALUES (999, 1, 'A');
 ERROR:  insert or update on table "enrollments" violates foreign key constraint "fk_student"
 DETAIL:  Key (student_id)=(999) is not present in table "students".
-
-![image](https://github.com/user-attachments/assets/1a8bf685-50a4-42ff-b97e-8b0544d1c8bb)
-
--- Try to insert an enrollment for a course_id that doesn't exist in courses. It should fail.
-
 university_db=> INSERT INTO enrollments (student_id, course_id, grade) VALUES (1, 90, 'A');
 ERROR:  insert or update on table "enrollments" violates foreign key constraint "fk_course"
 DETAIL:  Key (course_id)=(90) is not present in table "courses".
-
-![image](https://github.com/user-attachments/assets/6fbadcaa-6f55-4f04-97ac-e6fb0f3a5c57)
-
--- Enroll 'Alice Smith' (assume her student_id is 1) in 'Introduction to SQL' (assume course_id is 1) and 'Database Design' (assume course_id is 2).
-
 university_db=> INSERT INTO enrollments (student_id, course_id, grade) VALUES (1, 1, 'A');
 INSERT 0 1
 university_db=> INSERT INTO enrollments (student_id, course_id) VALUES (1, 2);
 INSERT 0 1
-
-![image](https://github.com/user-attachments/assets/edfc0f66-a681-4d3f-996e-da9e07dbd7fa)
-
-
--- Enroll 'Robert Johnson' (assume student_id is 2) in 'Introduction to SQL' (course_id 1).
-
-
 university_db=> INSERT INTO enrollments (student_id, course_id, grade) VALUES (2, 1, 'B');
 INSERT 0 1
 university_db=> SELECT * FROM enrollments
@@ -650,9 +1462,34 @@ university_db-> ;
              5 |          2 |         1 | 2025-05-30      | B
 (3 rows)
 
-![image](https://github.com/user-attachments/assets/62923059-f20e-4b17-91a9-469fc76d68d6)
+
+university_db=> SELECT * FROM students WHERE student_id = 1;
+ student_id | first_name | last_name |          email          |    dob     | enrollment_status
+------------+------------+-----------+-------------------------+------------+-------------------
+          1 | Alice      | Smith     | alice.smith@example.com | 2003-05-15 | enrolled
+(1 row)
 
 
+university_db=> SELECT * FROM enrollments WHERE student_id = 1;
+ enrollment_id | student_id | course_id | enrollment_date | grade
+---------------+------------+-----------+-----------------+-------
+             3 |          1 |         1 | 2025-05-30      | A
+             4 |          1 |         2 | 2025-05-30      |
+(2 rows)
 
 
+university_db=> DELETE FROM students WHERE student_id = 1;
+DELETE 1
+university_db=> SELECT * FROM students WHERE student_id = 1;
+ student_id | first_name | last_name | email | dob | enrollment_status
+------------+------------+-----------+-------+-----+-------------------
+(0 rows)
 
+
+university_db=> SELECT * FROM enrollments WHERE student_id = 1;
+ enrollment_id | student_id | course_id | enrollment_date | grade
+---------------+------------+-----------+-----------------+-------
+(0 rows)
+
+
+university_db=>
